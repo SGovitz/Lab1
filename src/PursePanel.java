@@ -11,7 +11,11 @@ public class PursePanel extends JPanel {
         this.setPreferredSize(new Dimension(400, 400)); // Panel size
     }
 
-    @Override
+    public void setPurse(Purse purse) {
+        this.purse = purse;
+        repaint(); // Redraw the panel when the purse is updated
+    }
+
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Clear the panel before painting
 

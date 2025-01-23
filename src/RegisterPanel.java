@@ -42,13 +42,15 @@ public class RegisterPanel extends JPanel {
     public class InputListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
                 double amount = Double.parseDouble(input.getText());
-
-                Purse purse = register.makeChange(amount);
-
-                //Add purse is empty
-
-                // Update the PursePanel with calculated change
-                changePanel.updatePurse(purse);
+                if (amount <= 0) {
+                    // If the amount is less than or equal to zero, show "Empty Purse"
+                    changePanel.setPurse(new Purse()); // Set an empty purse
+                    JOptionPane.showMessageDialog(RegisterPanel.this, "Empty Purse");
+                } else {
+                    // Generate the change and update the purse panel
+                    Purse purse = register.makeChange(amount);
+                    changePanel.setPurse(purse);
+                }
         }
     }
 }
