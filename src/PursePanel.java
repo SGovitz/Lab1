@@ -2,29 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PursePanel extends JPanel {
+    public JTextArea purseDisplay;
+
     public PursePanel() {
-        this.purse = new Purse();
+        this.setBackground(Color.WHITE);
+        this.setPreferredSize(new Dimension(400, 400));
+
+        purseDisplay = new JTextArea(20, 30); // 20 rows, 30 columns
+        purseDisplay.setEditable(false);
+        purseDisplay.setFont(new Font("Monospaced", Font.PLAIN, 12));
+
+        this.add(new JScrollPane(purseDisplay)); // Add scroll pane for long content
     }
 
-    public void setPurse(Purse purse) {
-        this.purse = purse;
-        repaint();
+    public void updatePurse(Purse purse) {
+        purseDisplay.setText(purse.toString());
     }
-
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        g.setColor(Color.BLACK);
-
-        int y = 20;
-        for (Map.Entry<Denomination, Integer> entry : purse.getCash().entrySet()) {
-            Denomination denom = entry.getKey();
-            int count = entry.getValue();
-            g.drawString(count + " x " + denom.name() + " ($" + denom.amt() + ")", 10, y);
-            y += 20;
-        }
-
-        g.drawString("Total value: $" + String.format("%.2f", purse.getValue()), 10, y);
-    }
-
 }
