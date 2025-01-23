@@ -4,10 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RegisterPanel extends JPanel {
-    private Register register;
-    private JPanel inputPanel;
-    private JTextField input;
-    private PursePanel changePanel;
+    public Register register;
+    public JPanel inputPanel;
+    public JTextField input;
+    public PursePanel changePanel;
 
     public RegisterPanel() {
         // Initialize components
@@ -39,26 +39,16 @@ public class RegisterPanel extends JPanel {
     }
 
     // Action listener for the submit button
-    private class InputListener implements ActionListener {
-        @Override
+    public class InputListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            try {
                 double amount = Double.parseDouble(input.getText());
-
-                if (amount <= 0) {
-                    JOptionPane.showMessageDialog(null, "Please enter a positive amount.");
-                    return;
-                }
 
                 Purse purse = register.makeChange(amount);
 
+                //Add purse is empty
+
                 // Update the PursePanel with calculated change
                 changePanel.updatePurse(purse);
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a numeric value.");
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
-            }
         }
     }
 }

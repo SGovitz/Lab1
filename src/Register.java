@@ -10,26 +10,40 @@ public class Register {
             new Denomination("One Note", 1.00, "bill", "Images/One_Bill.jpg"),
             new Denomination("Quarter", 0.25, "coin", "Images/Quarter_Coin.jpeg"),
             new Denomination("Dime", 0.10, "coin", "Images/Dime_Coin.png"),
-            new Denomination("Nickel", 0.05, "coin", "Images/Nickel_Coin.jpeg"),
+            new Denomination("Nickel", 0.05, "coin", "Images/Nickel_Coin.jpg"),
             new Denomination("Penny", 0.01, "coin", "Images/Penny_Coin.png")
     };
 
     public Purse makeChange(double amt) {
         Purse money = new Purse();
 
+        if (amt >= 0.005 && amt <= 0.01) {
+            amt = 0.01;
+        }
+
         for (Denomination denom : denominations) {
             int count = (int) (amt / denom.amt());
             if (count > 0) {
                 money.add(denom, count);
                 amt -= count * denom.amt();
-                amt = Math.round(amt * 100.0) / 100.0; // Round to avoid precision errors
+                amt = Math.round((amt + 0.00001) * 100.0) / 100.0;
             }
         }
-
-        if (amt > 0) {
-            throw new IllegalArgumentException("Cannot make exact change for the specified amount.");
-        }
-
         return money;
+    }
+    // Main method to demonstrate functionality
+    public static void main(String[] args) {
+        // Create a new Register
+        Register register = new Register();
+
+        // Specify the amount to make change for
+        double amt = 0.005;  // Example amount
+
+        // Call the makeChange method
+        Purse purse = register.makeChange(amt);
+
+        // Output the results
+        System.out.println("Change for $" + amt + " is:");
+        System.out.println(purse);
     }
 }
