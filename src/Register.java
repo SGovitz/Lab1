@@ -31,19 +31,20 @@ public class Register {
         }
         return money;
     }
-    // Main method to demonstrate functionality
+
     public static void main(String[] args) {
         // Create a new Register
         Register register = new Register();
+        Scanner scanner = new Scanner(System.in);
 
-        // Specify the amount to make change for
-        double amt = 0.005;  // Example amount
+        // Prompt the user to enter the amount
+        System.out.print("Enter the amount you want to make change for: $");
+        double amt = scanner.nextDouble();
 
         // Call the makeChange method
         Purse purse = register.makeChange(amt);
 
         // Output the results
-        System.out.println("Change for $" + amt + " is:");
         System.out.println(purse);
     }
 }

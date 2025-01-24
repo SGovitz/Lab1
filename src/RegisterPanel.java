@@ -13,14 +13,14 @@ public class RegisterPanel extends JPanel {
         // Initialize components
         register = new Register();
         inputPanel = new JPanel();
-        input = new JTextField(10); // 10-column wide text field
+        input = new JTextField(10);
         changePanel = new PursePanel();
 
         // Configure layout and styles
         this.setBackground(Color.BLUE);
         this.setPreferredSize(new Dimension(500, 500));
 
-        inputPanel.setBackground(Color.LIGHT_GRAY);
+        inputPanel.setBackground(Color.CYAN);
         inputPanel.setPreferredSize(new Dimension(300, 50));
 
         // Add components to inputPanel
@@ -42,9 +42,9 @@ public class RegisterPanel extends JPanel {
     public class InputListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
                 double amount = Double.parseDouble(input.getText());
-                if (amount <= 0) {
+                if (amount <= 0 || amount == 0.00001) {
                     // If the amount is less than or equal to zero, show "Empty Purse"
-                    changePanel.setPurse(new Purse()); // Set an empty purse
+                    changePanel.setPurse(new Purse());
                     JOptionPane.showMessageDialog(RegisterPanel.this, "Empty Purse");
                 } else {
                     // Generate the change and update the purse panel

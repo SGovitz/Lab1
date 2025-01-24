@@ -3,25 +3,31 @@ import java.awt.*;
 import java.util.Map;
 
 public class PursePanel extends JPanel {
-    private Purse purse; // Represents the contents of the purse
+    private Purse purse;
 
     public PursePanel() {
-        this.purse = new Purse(); // Initialize with an empty purse
-        this.setBackground(Color.WHITE); // Set background color
-        this.setPreferredSize(new Dimension(400, 400)); // Panel size
+        this.purse = new Purse();
+        // Set background color
+        this.setBackground(Color.WHITE);
+        // Panel size
+        this.setPreferredSize(new Dimension(400, 400));
     }
 
+    // Redraw the panel when the purse is updated
     public void setPurse(Purse purse) {
         this.purse = purse;
-        repaint(); // Redraw the panel when the purse is updated
+        repaint();
     }
 
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); // Clear the panel before painting
+        // Clear the panel before painting
+        super.paintComponent(g);
 
         if (purse != null) {
-            int yPos = 20; // Starting y-position for rendering content
-            int xStart = 10; // Starting x-position for rendering images
+            // Starting y-position for rendering content
+            int yPos = 20;
+            // Starting x-position for rendering images
+            int xStart = 10;
 
             for (Map.Entry<Denomination, Integer> entry : purse.getCash().entrySet()) {
                 Denomination denom = entry.getKey();
@@ -31,15 +37,15 @@ public class PursePanel extends JPanel {
                 ImageIcon icon = new ImageIcon(denom.img());
                 Image img = icon.getImage();
 
-                // Determine image size based on the form (bill or coin)
+                // Change Image Width of bill to be slightly larger
                 int imageWidth = denom.form().equalsIgnoreCase("bill") ? 125 : 50;
                 int imageHeight = 50;
 
                 // Render multiple images based on the count
                 for (int i = 0; i < count; i++) {
-                    int tempX = xStart + (i % 11) * (imageWidth + 10); // Wrap after 10 images per row
-                    int tempY = yPos + (i / 11) * (imageHeight + 20);  // Move down for new rows
-                    g.drawImage(img, tempX, tempY, imageWidth, imageHeight, this); // Draw the image
+                    int tempX = xStart + (i % 11) * (imageWidth + 10);
+                    int tempY = yPos + (i / 11) * (imageHeight + 20);
+                    g.drawImage(img, tempX, tempY, imageWidth, imageHeight, this);
                 }
 
                 // Draw text below the row of images
@@ -56,8 +62,4 @@ public class PursePanel extends JPanel {
         }
     }
 
-    public void updatePurse(Purse newPurse) {
-        this.purse = newPurse; // Update the purse with new content
-        repaint(); // Trigger repaint to show updated content
-    }
 }

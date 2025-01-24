@@ -27,13 +27,11 @@ public class Purse {
 
     public String toString() {
         StringBuilder sb = new StringBuilder("Purse contents:\n");
-        cash.forEach((denomination, count) -> sb.append(count)
-                .append(" x ")
-                .append(denomination.name())
-                .append(" ($")
-                .append(String.format("%.2f", denomination.amt()))
-                .append(")\n"));
+        cash.forEach((denomination, count) -> sb.append(count).append(" x ").append(denomination.name()).append(" ($").append(String.format("%.2f", denomination.amt())).append(")\n"));
         sb.append("Total value: $").append(String.format("%.2f", getValue()));
+        if (getValue() == 0.00){
+            sb.append("\nEmpty Purse!");
+        }
         return sb.toString();
     }
 }
