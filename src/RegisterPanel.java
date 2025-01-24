@@ -4,18 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RegisterPanel extends JPanel {
-    public Register register;
-    public JPanel inputPanel;
-    public JTextField input;
-    public PursePanel changePanel;
+    public Register register = new Register();
+    public JPanel inputPanel = new JPanel();
+    public JTextField input = new JTextField(10);
+    public PursePanel changePanel = new PursePanel();
 
     public RegisterPanel() {
-        // Initialize components
-        register = new Register();
-        inputPanel = new JPanel();
-        input = new JTextField(10);
-        changePanel = new PursePanel();
-
         // Configure layout and styles
         this.setBackground(Color.BLUE);
         this.setPreferredSize(new Dimension(500, 500));

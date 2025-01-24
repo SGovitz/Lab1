@@ -29,7 +29,7 @@ public class PursePanel extends JPanel {
             // Starting x-position for rendering images
             int xStart = 10;
 
-            for (Map.Entry<Denomination, Integer> entry : purse.getCash().entrySet()) {
+            for (Map.Entry<Denomination, Integer> entry : purse.cash().entrySet()) {
                 Denomination denom = entry.getKey();
                 int count = entry.getValue();
 
